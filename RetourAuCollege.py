@@ -1,4 +1,4 @@
-#!/usr/bin/python3.6
+#!/usr/bin/en python3
 # -*- coding: utf-8 -*-
 
 
@@ -38,6 +38,7 @@
 # import string
 import socket
 import time
+import math
 
 server = "irc.root-me.org"
 chann = "#root-me_challenge"
@@ -46,7 +47,7 @@ bot = "Candy"
 nick = "toto69nick"
 ident = "toto69"
 
-irc = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # création du socket
+irc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # création du socket
 print("Socket créé.")
 
 irc.connect((server, port))
@@ -62,13 +63,10 @@ irc.send(bytes("JOIN {}\n".format(chann), "UTF-8"))
 
 time.sleep(2)
 
-
 irc.send(bytes("PRIVMSG {} !ep1\r\n".format(bot), "UTF-8"))
 print("Pause....")
-time.sleep(2)
+time.sleep(0.5)
 text = irc.recv(10240).decode("UTF-8")
-
-print(text)
 
 i = True
 c = -1
@@ -99,6 +97,20 @@ while i:
 
 print("Première valeur : {}".format(var2))
 print("Deuxième valeur : {}".format(var1))
+val1 = int(var2)
+val2 = int(var1)
 
+val1 = math.sqrt(val1)
+res = float(val1 * val2)
+res = round(res, 2)
+
+res = str(res)
+print(res)
+
+
+irc.send(bytes("PRIVMSG {} !ep1 -rep {}\r\n".format(bot, res), "UTF-8"))
+text = irc.recv(1024).decode("UTF-8")
+
+print(text)
 
 irc.close()
