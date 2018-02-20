@@ -26,6 +26,8 @@
 # Canal IRC	#root-me_challenge
 # Bot	candy
 
+# test
+
 import socket
 import time
 import base64
